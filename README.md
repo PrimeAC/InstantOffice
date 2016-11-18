@@ -1,2 +1,2 @@
 # Projeto-BD
-Repository for the project for the Databases class.
+Repository for the project of Databases class.
