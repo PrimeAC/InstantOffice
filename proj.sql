@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS User CASCADE;
 DROP TABLE IF EXISTS Fiscal CASCADE;
 DROP TABLE IF EXISTS Edificio CASCADE;
@@ -11,6 +12,7 @@ DROP TABLE IF EXISTS Aluga CASCADE;
 DROP TABLE IF EXISTS Paga CASCADE;
 DROP TABLE IF EXISTS Estado CASCADE;
 DROP TABLE IF EXISTS Reserva CASCADE;
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE User
 (
@@ -77,7 +79,7 @@ CREATE TABLE Posto
 (
   morada        VARCHAR(255) NOT NULL UNIQUE,
   codigo        INTEGER      NOT NULL UNIQUE,
-  codigo_espaço VARCHAR(255) NOT NULL,
+  codigo_espaço INTEGER      NOT NULL UNIQUE,
   PRIMARY KEY (morada, codigo),
   FOREIGN KEY (morada) REFERENCES Alugavel (morada),
   FOREIGN KEY (codigo) REFERENCES Alugavel (codigo),
@@ -96,6 +98,21 @@ CREATE TABLE Oferta
   FOREIGN KEY (codigo) REFERENCES Alugavel (codigo)
 );
 
+CREATE TABLE Reserva
+(
+  numero INTEGER NOT NULL UNIQUE,
+  PRIMARY KEY (numero)
+);
+
+CREATE TABLE Paga
+(
+  numero INTEGER      NOT NULL UNIQUE,
+  data   VARCHAR(255) NOT NULL,
+  metodo VARCHAR(255) NOT NULL,
+  PRIMARY KEY (numero),
+  FOREIGN KEY (numero) REFERENCES Reserva (numero)
+);
+
 CREATE TABLE Aluga
 (
   morada      VARCHAR(255) NOT NULL UNIQUE,
@@ -111,15 +128,6 @@ CREATE TABLE Aluga
   FOREIGN KEY (numero) REFERENCES Reserva (numero)
 );
 
-CREATE TABLE Paga
-(
-  numero INTEGER      NOT NULL UNIQUE,
-  data   VARCHAR(255) NOT NULL,
-  metodo VARCHAR(255) NOT NULL,
-  PRIMARY KEY (numero),
-  FOREIGN KEY (numero) REFERENCES Reserva (numero)
-);
-
 CREATE TABLE Estado
 (
   numero    INTEGER      NOT NULL UNIQUE,
@@ -127,10 +135,4 @@ CREATE TABLE Estado
   estado    VARCHAR(255) NOT NULL,
   PRIMARY KEY (numero, timestamp),
   FOREIGN KEY (numero) REFERENCES Reserva (numero)
-);
-
-CREATE TABLE Reserva
-(
-  numero INTEGER NOT NULL UNIQUE,
-  PRIMARY KEY (numero)
 );
