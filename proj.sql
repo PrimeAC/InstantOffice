@@ -1,18 +1,17 @@
-/*
- drop table User cascade;
- drop table Fiscal cascade;
- drop table Edificio cascade;
- drop table Alugavel cascade;
- drop table Arrenda cascade;
- drop table Fiscaliza cascade;
- drop table Espaço cascade;
- drop table Posto cascade;
- drop table Oferta cascade;
- drop table Aluga cascade;
- drop table Paga cascade;
- drop table Estado cascade;
- drop table Reserva cascade;
-*/
+DROP TABLE IF EXISTS User CASCADE;
+DROP TABLE IF EXISTS Fiscal CASCADE;
+DROP TABLE IF EXISTS Edificio CASCADE;
+DROP TABLE IF EXISTS Alugavel CASCADE;
+DROP TABLE IF EXISTS Arrenda CASCADE;
+DROP TABLE IF EXISTS Fiscaliza CASCADE;
+DROP TABLE IF EXISTS Espaço CASCADE;
+DROP TABLE IF EXISTS Posto CASCADE;
+DROP TABLE IF EXISTS Oferta CASCADE;
+DROP TABLE IF EXISTS Aluga CASCADE;
+DROP TABLE IF EXISTS Paga CASCADE;
+DROP TABLE IF EXISTS Estado CASCADE;
+DROP TABLE IF EXISTS Reserva CASCADE;
+
 create table User
    (nif	integer	not null unique,
     nome 	varchar(255)	not null,
