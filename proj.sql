@@ -79,7 +79,7 @@ CREATE TABLE Posto
   codigo_espaco INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
   FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
-  FOREIGN KEY (codigo_espaco) REFERENCES Espaco (codigo)
+  FOREIGN KEY (morada, codigo_espaco) REFERENCES Espaco (morada, codigo)
 );
 
 CREATE TABLE Oferta
