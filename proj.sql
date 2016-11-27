@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS Edificio CASCADE;
 DROP TABLE IF EXISTS Alugavel CASCADE;
 DROP TABLE IF EXISTS Arrenda CASCADE;
 DROP TABLE IF EXISTS Fiscaliza CASCADE;
-DROP TABLE IF EXISTS Espaço CASCADE;
+DROP TABLE IF EXISTS Espaco CASCADE;
 DROP TABLE IF EXISTS Posto CASCADE;
 DROP TABLE IF EXISTS Oferta CASCADE;
 DROP TABLE IF EXISTS Aluga CASCADE;
@@ -64,7 +64,7 @@ CREATE TABLE Fiscaliza
   FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
 );
 
-CREATE TABLE Espaço
+CREATE TABLE Espaco
 (
   morada VARCHAR(255) NOT NULL,
   codigo INTEGER      NOT NULL,
@@ -76,10 +76,10 @@ CREATE TABLE Posto
 (
   morada        VARCHAR(255) NOT NULL,
   codigo        INTEGER      NOT NULL,
-  codigo_espaço INTEGER      NOT NULL,
+  codigo_espaco INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
   FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
-  FOREIGN KEY (codigo_espaço) REFERENCES Espaço (codigo)
+  FOREIGN KEY (codigo_espaco) REFERENCES Espaco (codigo)
 );
 
 CREATE TABLE Oferta
