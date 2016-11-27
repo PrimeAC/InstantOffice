@@ -37,8 +37,8 @@ CREATE TABLE Edificio
 
 CREATE TABLE Alugavel
 (
-  morada VARCHAR(255) NOT NULL UNIQUE,
-  codigo INTEGER      NOT NULL UNIQUE,
+  morada VARCHAR(255) NOT NULL,
+  codigo INTEGER      NOT NULL,
   foto   VARCHAR(255) NOT NULL,
   PRIMARY KEY (morada, codigo),
   FOREIGN KEY (morada) REFERENCES Edificio (morada)
@@ -46,56 +46,51 @@ CREATE TABLE Alugavel
 
 CREATE TABLE Arrenda
 (
-  morada VARCHAR(255) NOT NULL UNIQUE,
-  codigo INTEGER      NOT NULL UNIQUE,
+  morada VARCHAR(255) NOT NULL,
+  codigo INTEGER      NOT NULL,
   nif    INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada) REFERENCES Alugavel (morada),
-  FOREIGN KEY (codigo) REFERENCES Alugavel (codigo),
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
   FOREIGN KEY (nif) REFERENCES User (nif)
 );
 
 CREATE TABLE Fiscaliza
 (
   id     INTEGER      NOT NULL UNIQUE,
-  morada VARCHAR(255) NOT NULL UNIQUE,
-  codigo INTEGER      NOT NULL UNIQUE,
+  morada VARCHAR(255) NOT NULL,
+  codigo INTEGER      NOT NULL,
   PRIMARY KEY (id, morada, codigo),
   FOREIGN KEY (id) REFERENCES Fiscal (id),
-  FOREIGN KEY (morada) REFERENCES Alugavel (morada),
-  FOREIGN KEY (codigo) REFERENCES Alugavel (codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
 );
 
 CREATE TABLE Espaço
 (
-  morada VARCHAR(255) NOT NULL UNIQUE,
-  codigo INTEGER      NOT NULL UNIQUE,
+  morada VARCHAR(255) NOT NULL,
+  codigo INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada) REFERENCES Alugavel (morada),
-  FOREIGN KEY (codigo) REFERENCES Alugavel (codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
 );
 
 CREATE TABLE Posto
 (
-  morada        VARCHAR(255) NOT NULL UNIQUE,
-  codigo        INTEGER      NOT NULL UNIQUE,
+  morada        VARCHAR(255) NOT NULL,
+  codigo        INTEGER      NOT NULL,
   codigo_espaço INTEGER      NOT NULL UNIQUE,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada) REFERENCES Alugavel (morada),
-  FOREIGN KEY (codigo) REFERENCES Alugavel (codigo),
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
   FOREIGN KEY (codigo_espaço) REFERENCES Espaço (codigo)
 );
 
 CREATE TABLE Oferta
 (
-  morada      VARCHAR(255) NOT NULL UNIQUE,
-  codigo      INTEGER      NOT NULL UNIQUE,
+  morada      VARCHAR(255) NOT NULL,
+  codigo      INTEGER      NOT NULL,
   data_inicio VARCHAR(255) NOT NULL UNIQUE,
   data_fim    VARCHAR(255) NOT NULL,
   tarifa      INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo, data_inicio),
-  FOREIGN KEY (morada) REFERENCES Alugavel (morada),
-  FOREIGN KEY (codigo) REFERENCES Alugavel (codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
 );
 
 CREATE TABLE Reserva
@@ -115,14 +110,13 @@ CREATE TABLE Paga
 
 CREATE TABLE Aluga
 (
-  morada      VARCHAR(255) NOT NULL UNIQUE,
-  codigo      INTEGER      NOT NULL UNIQUE,
+  morada      VARCHAR(255) NOT NULL,
+  codigo      INTEGER      NOT NULL,
   data_inicio VARCHAR(255) NOT NULL UNIQUE,
   nif         INTEGER      NOT NULL UNIQUE,
   numero      INTEGER      NOT NULL UNIQUE,
   PRIMARY KEY (morada, codigo, data_inicio, nif, numero),
-  FOREIGN KEY (morada) REFERENCES Oferta (morada),
-  FOREIGN KEY (codigo) REFERENCES Oferta (codigo),
+  FOREIGN KEY (morada, codigo) REFERENCES Oferta (morada, codigo),
   FOREIGN KEY (data_inicio) REFERENCES Oferta (data_inicio),
   FOREIGN KEY (nif) REFERENCES User (nif),
   FOREIGN KEY (numero) REFERENCES Reserva (numero)
