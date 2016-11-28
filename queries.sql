@@ -47,7 +47,6 @@ FROM (SELECT
      nif,
      id
    FROM Arrenda
-     NATURAL JOIN Alugavel
      NATURAL JOIN Fiscaliza
    GROUP BY nif, id) AS aux2
 WHERE n_alugaveis = fiscal_count;
