@@ -102,7 +102,7 @@ CREATE TABLE Reserva
 CREATE TABLE Paga
 (
   numero INTEGER      NOT NULL,
-  data   VARCHAR(255) NOT NULL,
+  data   TIMESTAMP NOT NULL,
   metodo VARCHAR(255) NOT NULL,
   PRIMARY KEY (numero),
   FOREIGN KEY (numero) REFERENCES Reserva (numero)
@@ -114,7 +114,7 @@ CREATE TABLE Aluga
   codigo      INTEGER      NOT NULL,
   data_inicio TIMESTAMP    NOT NULL,
   nif         INTEGER      NOT NULL,
-  numero      INTEGER      NOT NULL,
+  numero      INTEGER      NOT NULL UNIQUE,
   PRIMARY KEY (morada, codigo, data_inicio, nif, numero),
   FOREIGN KEY (morada, codigo, data_inicio) REFERENCES Oferta (morada, codigo, data_inicio),
   FOREIGN KEY (nif) REFERENCES User (nif),
