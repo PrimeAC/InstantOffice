@@ -9,9 +9,10 @@ WHERE (morada, codigo) NOT IN (
     codigo_espaco AS codigo
   FROM Posto
     NATURAL JOIN Aluga
+    NATURAL JOIN Estado WHERE estado = "aceite"
 );
 
-# b )
+# b) Quais os edificio com numero de reservas superior a media?
 SELECT morada
 FROM (
        SELECT AVG(count_reservas) AS average
