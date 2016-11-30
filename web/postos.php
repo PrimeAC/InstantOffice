@@ -51,9 +51,12 @@ if (isset($_REQUEST["morada_remove"]) and isset($_REQUEST["codigo_remove"])) {
     $query->execute(array('morada' => $_REQUEST["morada_remove"], 'codigo' => $_REQUEST["codigo_remove"]));
 }
 if (isset($_REQUEST["morada_add"]) and isset($_REQUEST["codigo_add1"])and isset($_REQUEST["codigo_add2"])) {
-    $sql = 'INSERT INTO Posto VALUES (:morada, :codigo, :codigoEspaco)';
-    $query = $connection->prepare($sql);
-    $query->execute(array('morada' => $_REQUEST["morada_add"], 'codigo' => $_REQUEST["codigo_add1"],
+    $sql_Alugavel = "INSERT INTO Alugavel VALUES (:morada, :codigo, '')";
+    $sql_Posto = 'INSERT INTO Posto VALUES (:morada, :codigo, :codigoEspaco)';
+    $query1 = $connection->prepare($sql_Alugavel);
+    $query1->execute(array('morada' => $_REQUEST["morada_add"], 'codigo' => $_REQUEST["codigo_add1"],));
+    $query2 = $connection->prepare($sql_Posto);
+    $query2->execute(array('morada' => $_REQUEST["morada_add"], 'codigo' => $_REQUEST["codigo_add1"],
         'codigoEspaco' => $_REQUEST["codigo_add2"]));
 }
 
