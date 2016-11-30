@@ -13,3 +13,4 @@ if (getenv("DOCKER_DEV")) {
 }
 
 $connection = new PDO("mysql:host=" . $host . ";dbname=" . $dbname, $user, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING));
+$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
