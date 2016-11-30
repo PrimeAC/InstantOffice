@@ -45,21 +45,24 @@ FROM (SELECT
    GROUP BY nif, id) AS aux2
 WHERE n_alugaveis = fiscal_count;
 
-
-
 # e)
-SELECT DISTINCT morada, codigo_espaco codigo FROM Posto
-WHERE (morada, codigo, codigo_espaco) NOT IN (
-  SELECT
+SELECT
+  morada,
+  codigo
+FROM Espaco
+WHERE (morada, codigo) NOT IN (
+  SELECT DISTINCT
     morada,
-    codigo,
-    codigo_espaco
+    codigo_espaco AS codigo
   FROM Posto
-    NATURAL JOIN Aluga
-    NATURAL JOIN (
-                   SELECT numero
-                   FROM Reserva
-                     NATURAL JOIN Estado
-                   WHERE estado = 'aceite'
-                 ) AS LOL
-);
+  WHERE (morada, codigo, codigo_espaco) NOT IN (
+    SELECT
+      morada,
+      codigo,
+      codigo_espaco
+    FROM Posto
+      NATURAL JOIN Aluga
+      NATURAL JOIN Estado
+    WHERE estado = 'aceite'
+  )
+)
