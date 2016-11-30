@@ -40,7 +40,6 @@ FROM (SELECT
         nif,
         COUNT(*) AS n_alugaveis
       FROM Arrenda
-        NATURAL JOIN Fiscaliza
       GROUP BY nif) AS aux1 NATURAL JOIN
   (SELECT
      count(nif) AS fiscal_count,
