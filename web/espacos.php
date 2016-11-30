@@ -37,9 +37,6 @@
 <br>
 
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include 'DB.php';
 include 'helpers.php';
 
@@ -55,7 +52,6 @@ if (isset($_REQUEST["morada_add"]) and isset($_REQUEST["codigo_add"])) {
     $query1->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
     $query2 = $connection->prepare($sql_Espaco);
     $query2->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
-//    $query->fetchAll();
 }
 
 $table = $connection->query("SELECT * FROM Espaco");
