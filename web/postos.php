@@ -16,8 +16,8 @@
 </head>
 
 <body>
-<form action="espacos.php" method="post">
-    <h3>Remover Espacos de Trabalho</h3>
+<form action="postos.php" method="post">
+    <h3>Remover Postos de Trabalho</h3>
     <label for="morada_remove">Morada</label>
     <input id="morada_remove" name="morada_remove">
     <label for="codigo_remove">Codigo</label>
@@ -25,12 +25,14 @@
     <input type="submit" value="Submeter">
 </form>
 <br>
-<form action="espacos.php" method="post">
-    <h3>Adicionar Espacos de Trabalho</h3>
+<form action="postos.php" method="post">
+    <h3>Adicionar Postos de Trabalho</h3>
     <label for="morada_add">Morada</label>
     <input id="morada_add" name="morada_add">
-    <label for="codigo_add">Codigo</label>
-    <input id="codigo_add" name="codigo_add">
+    <label for="codigo_add1">Codigo</label>
+    <input id="codigo_add1" name="codigo_add1">
+    <label for="codigo_add2">Codigo Espaco</label>
+    <input id="codigo_add2" name="codigo_add2">
     <input type="submit" value="Submeter">
 </form>
 <br>
@@ -48,15 +50,14 @@ if (isset($_REQUEST["morada_remove"]) and isset($_REQUEST["codigo_remove"])) {
     $query = $connection->prepare($sql);
     $query->execute(array('morada' => $_REQUEST["morada_remove"], 'codigo' => $_REQUEST["codigo_remove"]));
 }
-if (isset($_REQUEST["morada_add"]) and isset($_REQUEST["codigo_add"])) {
-    $sql_Alugavel = "INSERT INTO Alugavel VALUES (:morada, :codigo,''); ";
-    $sql_Espaco = 'INSERT INTO Espaco VALUES (:morada, :codigo);';
-    $query = $connection->prepare($sql_Alugavel.$sql_Espaco);
-    $query->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
-    $query->fetchAll();
+if (isset($_REQUEST["morada_add"]) and isset($_REQUEST["codigo_add1"])and isset($_REQUEST["codigo_add2"])) {
+    $sql = 'INSERT INTO Posto VALUES (:morada, :codigo, :codigoEspaco)';
+    $query = $connection->prepare($sql);
+    $query->execute(array('morada' => $_REQUEST["morada_add"], 'codigo' => $_REQUEST["codigo_add1"],
+        'codigoEspaco' => $_REQUEST["codigo_add2"]));
 }
 
-$table = $connection->query("SELECT * FROM Espaco");
+$table = $connection->query("SELECT * FROM Posto");
 drawTable($table);
 ?>
 </body>
