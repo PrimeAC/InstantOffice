@@ -14,8 +14,7 @@ FOR EACH ROW
                     AND NEW.data_inicio < Oferta.data_fim
                     AND NEW.data_fim > Oferta.data_inicio)
     THEN
-      SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Dates overlap with existing rows';
+      call Dates_overlap_with_existing_rows();
     END IF;
   END //
 
