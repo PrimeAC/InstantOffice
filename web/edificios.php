@@ -32,11 +32,11 @@
 include 'DB.php';
 include 'helpers.php';
 
-if (isset($_REQUEST["morada_remove"])) {
+if ($_REQUEST["morada_remove"]) {
     $query = $connection->prepare('DELETE FROM Edificio WHERE morada = :morada');
     $query->execute(array('morada' => $_REQUEST["morada_remove"]));
 }
-if (isset($_REQUEST["morada_add"])) {
+if ($_REQUEST["morada_add"]) {
     $query = $connection->prepare('INSERT INTO Edificio VALUES (:morada)');
     $query->execute(array('morada' => $_REQUEST["morada_add"]));
 }
