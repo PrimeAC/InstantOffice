@@ -46,12 +46,20 @@ FROM (SELECT
 WHERE n_alugaveis = fiscal_count;
 
 
+
 # e)
-
-SELECT numero
-FROM Reserva NATURAL JOIN Estado
-WHERE estado = "aceite"
-
-SELECT morada, codigo_espaco
-FROM
-
+SELECT DISTINCT morada, codigo_espaco codigo FROM Posto
+WHERE (morada, codigo, codigo_espaco) NOT IN (
+  SELECT
+    morada,
+    codigo,
+    codigo_espaco
+  FROM Posto
+    NATURAL JOIN Aluga
+    NATURAL JOIN (
+                   SELECT numero
+                   FROM Reserva
+                     NATURAL JOIN Estado
+                   WHERE estado = 'aceite'
+                 ) AS LOL
+);
