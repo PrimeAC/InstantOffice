@@ -20,3 +20,26 @@ FOR EACH ROW
   END //
 
 DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS superior_date;
+
+DELIMITER //
+
+#b)RI-2: "A data de pagamento de uma reserva paga tem de ser superior ao timestamp do
+#último estado dessa reserva"
+CREATE TRIGGER superior_date
+BEFORE INSERT ON Paga
+FOR EACH ROW
+  BEGIN
+    IF EXISTS(SELECT *
+              FROM Estado
+              WHERE estado = "aceite" AND numero = new.numero
+                    AND Estado.timestamp > new.data
+              GROUP BY numero)
+    THEN
+      CALL nao_deu();
+    END IF;
+  END //
+
+DELIMITER ;

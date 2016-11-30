@@ -275,7 +275,6 @@ INSERT INTO Aluga VALUES ('E', 5006, '2016/1/10', 202020, 23);
 INSERT INTO Aluga VALUES ('F', 6001, '2016/1/10', 313131, 24);
 INSERT INTO Aluga VALUES ('F', 6001, '2016/1/10', 303030, 25);
 INSERT INTO Aluga VALUES ('H', 8001, '2016/1/10', 121212, 26);
-
 INSERT INTO Aluga VALUES ('A', 1000, '2016/1/10', 221122, 27);
 INSERT INTO Aluga VALUES ('B', 2001, '2016/1/10', 221122, 28);
 INSERT INTO Aluga VALUES ('B', 2003, '2016/1/10', 212122, 29);
@@ -313,19 +312,25 @@ INSERT INTO Estado VALUES (23, '2016/1/10', 'pendente');
 INSERT INTO Estado VALUES (24, '2016/1/10', 'pendente');
 INSERT INTO Estado VALUES (25, '2016/1/10', 'pendente');
 INSERT INTO Estado VALUES (26, '2016/1/10', 'pendente');
-
 INSERT INTO Estado VALUES (1, '2016/1/10 12', 'aceite');
 INSERT INTO Estado VALUES (5, '2016/1/10 12', 'declinada');
 INSERT INTO Estado VALUES (6, '2016/1/10 12', 'cancelada');
-
+INSERT INTO Estado VALUES (4, '2016/1/11', 'aceite');
+INSERT INTO Estado VALUES (8, '2016/1/23', 'aceite');
+INSERT INTO Estado VALUES (15, '2016/2/10', 'aceite');
+INSERT INTO Estado VALUES (18, '2016/1/11', 'aceite');
+INSERT INTO Estado VALUES (20, '2016/3/10', 'aceite');
+INSERT INTO Estado VALUES (23, '2016/2/10', 'aceite');
+INSERT INTO Estado VALUES (30, '2016/4/10', 'aceite');
+INSERT INTO Estado VALUES (32, '2016/5/10', 'aceite');
 
 INSERT INTO Paga VALUES (1, '2017/1/10', 'cartao');
-INSERT INTO Paga VALUES (4, '2015/1/10', 'cartao');
-INSERT INTO Paga VALUES (8, '2016/1/10', 'dinheiro');
-INSERT INTO Paga VALUES (15, '2016/1/10', 'cartao');
-INSERT INTO Paga VALUES (18, '2016/1/10', 'cartao');
-INSERT INTO Paga VALUES (20, '2017/1/10', 'dinheiro');
-INSERT INTO Paga VALUES (23, '2016/1/10', 'cheque');
-INSERT INTO Paga VALUES (30, '2016/1/10', 'cartao');
-INSERT INTO Paga VALUES (32, '2015/1/10', 'cartao');
+INSERT INTO Paga VALUES (4, '2017/1/12', 'cartao');
+INSERT INTO Paga VALUES (8, '2016/2/10', 'dinheiro');
+INSERT INTO Paga VALUES (15, '2016/3/10', 'cartao');
+INSERT INTO Paga VALUES (18, '2016/1/12', 'cartao');
+INSERT INTO Paga VALUES (20, '2017/4/10', 'dinheiro');
+INSERT INTO Paga VALUES (23, '2016/3/17', 'cheque');
+INSERT INTO Paga VALUES (30, '2016/4/19', 'cartao');
+INSERT INTO Paga VALUES (32, '2016/8/10', 'cartao');
 
