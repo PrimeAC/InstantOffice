@@ -41,7 +41,7 @@ CREATE TABLE Alugavel
   codigo INTEGER      NOT NULL,
   foto   VARCHAR(255) NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada) REFERENCES Edificio (morada)
+  FOREIGN KEY (morada) REFERENCES Edificio (morada) ON DELETE CASCADE
 );
 
 CREATE TABLE Arrenda
@@ -50,8 +50,8 @@ CREATE TABLE Arrenda
   codigo INTEGER      NOT NULL,
   nif    INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
-  FOREIGN KEY (nif) REFERENCES User (nif)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo) ON DELETE CASCADE ,
+  FOREIGN KEY (nif) REFERENCES User (nif) ON DELETE CASCADE
 );
 
 CREATE TABLE Fiscaliza
@@ -60,8 +60,8 @@ CREATE TABLE Fiscaliza
   morada VARCHAR(255) NOT NULL,
   codigo INTEGER      NOT NULL,
   PRIMARY KEY (id, morada, codigo),
-  FOREIGN KEY (id) REFERENCES Fiscal (id),
-  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
+  FOREIGN KEY (id) REFERENCES Fiscal (id) ON DELETE CASCADE ,
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo) ON DELETE CASCADE
 );
 
 CREATE TABLE Espaco
@@ -69,7 +69,7 @@ CREATE TABLE Espaco
   morada VARCHAR(255) NOT NULL,
   codigo INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo) ON DELETE CASCADE
 );
 
 CREATE TABLE Posto
@@ -78,8 +78,8 @@ CREATE TABLE Posto
   codigo        INTEGER      NOT NULL,
   codigo_espaco INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo),
-  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo),
-  FOREIGN KEY (morada, codigo_espaco) REFERENCES Espaco (morada, codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo) ON DELETE CASCADE ,
+  FOREIGN KEY (morada, codigo_espaco) REFERENCES Espaco (morada, codigo) ON DELETE CASCADE
 );
 
 CREATE TABLE Oferta
@@ -90,7 +90,7 @@ CREATE TABLE Oferta
   data_fim    TIMESTAMP    NOT NULL,
   tarifa      INTEGER      NOT NULL,
   PRIMARY KEY (morada, codigo, data_inicio),
-  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo)
+  FOREIGN KEY (morada, codigo) REFERENCES Alugavel (morada, codigo) ON DELETE CASCADE
 );
 
 CREATE TABLE Reserva
@@ -105,7 +105,7 @@ CREATE TABLE Paga
   data   TIMESTAMP NOT NULL,
   metodo VARCHAR(255) NOT NULL,
   PRIMARY KEY (numero),
-  FOREIGN KEY (numero) REFERENCES Reserva (numero)
+  FOREIGN KEY (numero) REFERENCES Reserva (numero) ON DELETE CASCADE
 );
 
 CREATE TABLE Aluga
@@ -116,9 +116,9 @@ CREATE TABLE Aluga
   nif         INTEGER      NOT NULL,
   numero      INTEGER      NOT NULL UNIQUE,
   PRIMARY KEY (morada, codigo, data_inicio, nif, numero),
-  FOREIGN KEY (morada, codigo, data_inicio) REFERENCES Oferta (morada, codigo, data_inicio),
-  FOREIGN KEY (nif) REFERENCES User (nif),
-  FOREIGN KEY (numero) REFERENCES Reserva (numero)
+  FOREIGN KEY (morada, codigo, data_inicio) REFERENCES Oferta (morada, codigo, data_inicio) ON DELETE CASCADE ,
+  FOREIGN KEY (nif) REFERENCES User (nif) ON DELETE CASCADE ,
+  FOREIGN KEY (numero) REFERENCES Reserva (numero) ON DELETE CASCADE
 );
 
 CREATE TABLE Estado
@@ -127,5 +127,5 @@ CREATE TABLE Estado
   timestamp TIMESTAMP    NOT NULL,
   estado    VARCHAR(255) NOT NULL,
   PRIMARY KEY (numero, timestamp),
-  FOREIGN KEY (numero) REFERENCES Reserva (numero)
+  FOREIGN KEY (numero) REFERENCES Reserva (numero) ON DELETE CASCADE
 );
