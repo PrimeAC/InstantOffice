@@ -15,24 +15,18 @@ WHERE (morada, codigo) NOT IN (
 
 # b) Quais os edificios com numero de reservas superior a media?
 SELECT morada
-FROM (
-       SELECT AVG(count_reservas) AS average
-       FROM (
-              SELECT
-                morada,
-                COUNT(*) AS count_reservas
-              FROM Reserva
-                NATURAL JOIN Aluga
-              GROUP BY morada
-            ) AS countT1) AS averageT,
-  (
-    SELECT
-      morada,
-      COUNT(*) AS count_reservas
-    FROM Reserva
-      NATURAL JOIN Aluga
-    GROUP BY morada) AS countT2
-WHERE count_reservas > average;
+FROM Aluga
+GROUP BY morada
+HAVING COUNT(*) > (
+  SELECT AVG(count_reservas) AS average
+  FROM (
+         SELECT
+           morada,
+           COUNT(*) AS count_reservas
+         FROM Aluga
+         GROUP BY morada
+       ) AS countT1
+);
 
 #c)Quais utilizadores cujos alugáveis foram fiscalizados sempre pelo mesmo fiscal?
 SELECT nif
