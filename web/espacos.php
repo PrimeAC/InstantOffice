@@ -51,9 +51,11 @@ if (isset($_REQUEST["morada_remove"]) and isset($_REQUEST["codigo_remove"])) {
 if (isset($_REQUEST["morada_add"]) and isset($_REQUEST["codigo_add"])) {
     $sql_Alugavel = "INSERT INTO Alugavel VALUES (:morada, :codigo,''); ";
     $sql_Espaco = 'INSERT INTO Espaco VALUES (:morada, :codigo);';
-    $query = $connection->prepare($sql_Alugavel.$sql_Espaco);
-    $query->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
-    $query->fetchAll();
+    $query1 = $connection->prepare($sql_Alugavel);
+    $query1->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
+    $query2 = $connection->prepare($sql_Espaco);
+    $query2->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"]));
+//    $query->fetchAll();
 }
 
 $table = $connection->query("SELECT * FROM Espaco");
