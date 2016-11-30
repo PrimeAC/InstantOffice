@@ -38,7 +38,7 @@ FOR EACH ROW
                     AND Estado.timestamp > new.data
               GROUP BY numero)
     THEN
-      CALL nao_deu();
+      CALL date_must_be_after_estado();
     END IF;
   END //
 
