@@ -10,7 +10,7 @@ WHERE (morada, codigo) NOT IN (
   FROM Posto
     NATURAL JOIN Aluga
     NATURAL JOIN Estado
-  WHERE estado = "aceite"
+  WHERE estado = 'aceite'
 );
 
 # b) Quais os edificios com numero de reservas superior a media?
@@ -51,4 +51,13 @@ FROM (SELECT
    GROUP BY nif, id) AS aux2
 WHERE n_alugaveis = fiscal_count;
 
+
+# e)
+
+SELECT numero
+FROM Reserva NATURAL JOIN Estado
+WHERE estado = "aceite"
+
+SELECT morada, codigo_espaco
+FROM
 
