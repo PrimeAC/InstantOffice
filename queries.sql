@@ -50,4 +50,4 @@ FROM (SELECT
    GROUP BY nif, id) AS aux2
 WHERE n_alugaveis = fiscal_count;
 
-
+SELECT MAX(numero)+1 FROM Reserva;

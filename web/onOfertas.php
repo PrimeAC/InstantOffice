@@ -33,15 +33,13 @@ error_reporting(E_ALL);
 include 'DB.php';
 include 'helpers.php';
 if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"])){
-    $sql_NumeroReserva = 'SELECT MAX(numero)+1 FROM Reserva';
-    $sql_Reserva = "INSERT INTO Reserva VALUES ('$sql_NumeroReserva')";
-    $query1 = $connection->prepare($sql_Reserva);
-    $query1->execute();
-    $query2 = $connection->prepare("INSERT INTO Estado VALUES ('$sql_NumeroReserva', '2016/1/10', 'pendente')");
-    $query2->execute();
+    $sql = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada='B' AND codigo=2000 AND Oferta.data_inicio = '2016/1/10'";
+    $query = $connection->prepare($sql);
+    echo(is_null($query));
+    $query->execute();
 }
 
-$table = $connection->query("SELECT * FROM Oferta");
+$table = $connection->query("SELECT * FROM Reserva");
 drawTable($table);
 ?>
 </body>
