@@ -51,3 +51,25 @@ FROM (SELECT
 WHERE n_alugaveis = fiscal_count;
 
 
+#MAYBE QUERY D
+SELECT
+  morada,
+  containing_space_code as codigo,
+  SUM(money) moneyz
+FROM (
+       SELECT
+         LOL.morada,
+         IFNULL(codigo_espaco, LOL.codigo) containing_space_code,
+         money
+       FROM Posto
+         RIGHT JOIN (
+                      SELECT
+                        morada,
+                        codigo,
+                        DATEDIFF(data_fim, data_inicio) * tarifa AS money
+                      FROM Paga
+                        NATURAL JOIN Aluga
+                        NATURAL JOIN Oferta
+                    ) AS LOL ON Posto.morada = LOL.morada AND Posto.codigo = LOL.codigo
+     ) AS LOL2
+GROUP BY morada, containing_space_code
