@@ -50,12 +50,11 @@ FROM (SELECT
    GROUP BY nif, id) AS aux2
 WHERE n_alugaveis = fiscal_count;
 
-
 #MAYBE QUERY D
 SELECT
   morada,
-  containing_space_code as codigo,
-  SUM(money) moneyz
+  containing_space_code AS codigo,
+  SUM(money)               moneyz
 FROM (
        SELECT
          LOL.morada,
@@ -70,6 +69,7 @@ FROM (
                       FROM Paga
                         NATURAL JOIN Aluga
                         NATURAL JOIN Oferta
+                      WHERE YEAR(data) = 2016
                     ) AS LOL ON Posto.morada = LOL.morada AND Posto.codigo = LOL.codigo
      ) AS LOL2
 GROUP BY morada, containing_space_code
