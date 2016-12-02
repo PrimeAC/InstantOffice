@@ -65,3 +65,4 @@ WHERE (morada, codigo) NOT IN (
     WHERE estado = 'aceite'
   )
 )
+
