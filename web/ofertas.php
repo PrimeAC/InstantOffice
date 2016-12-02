@@ -57,7 +57,7 @@ if (isset($_REQUEST["morada_remove"], $_REQUEST["codigo_remove"], $_REQUEST["dat
 }
 if (isset($_REQUEST["morada_add"], $_REQUEST["codigo_add"], $_REQUEST["datai_add"], $_REQUEST["dataf_add"],
     $_REQUEST["tarifa_add"])) {
-    if ((strtotime($_REQUEST["datai_add"]) < strtotime($_REQUEST["dataf_add"]))
+    if ((strtotime($_REQUEST["datai_add"]) <= strtotime($_REQUEST["dataf_add"]))
         AND (strtotime(date_default_timezone_get()) <= strtotime($_REQUEST["datai_add"]))
     ) {
         $sql = 'INSERT INTO Oferta VALUES (:morada, :codigo, :data_inicio, :data_fim, :tarifa);';
