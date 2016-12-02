@@ -33,7 +33,7 @@ FOR EACH ROW
   BEGIN
     IF EXISTS(SELECT *
               FROM Estado
-              WHERE estado = 'aceit' AND numero = new.numero
+              WHERE estado = 'aceite' AND numero = new.numero
                     AND Estado.timestamp > new.data
               GROUP BY numero)
     THEN
