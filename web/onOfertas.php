@@ -51,7 +51,7 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
         $query = $connection->prepare($sql);
         $query->execute();
     }
-    else{echo("Insira dados válidos");
+    else{echo("Insira dados válidos");}
 }
 
 $table = $connection->query("SELECT * FROM Estado");
