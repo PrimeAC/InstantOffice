@@ -27,7 +27,7 @@ include 'DB.php';
 include 'helpers.php';
 
 if (isset($_REQUEST["morada_query"])) {
-    $query = $connection->prepare('CALL test(:morada);');
+    $query = $connection->prepare('CALL totalPorEspaco(:morada);');
     $query->execute(array('morada' => $_REQUEST["morada_query"]));
     drawTable($query);
     $query->closeCursor();
