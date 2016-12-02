@@ -37,6 +37,8 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
     $sql = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada= :reserva AND codigo= :codigo AND 
       data_inicio = :data_inicio";
 
+    $connection->beginTransaction();
+
     $query = $connection->prepare($sql);
     $query->execute(array('reserva' => $_REQUEST["reserva_add"], 'codigo' => $_REQUEST["codigo_add"],
         'data_inicio' => $_REQUEST["data_add"]));
@@ -46,8 +48,6 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
     if (count($result) != 0) {
 
         $sql = "SELECT MAX(numero) FROM Reserva";
-
-        $connection->beginTransaction();
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -61,9 +61,8 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
 
         $query = $connection->prepare($sql);
         $query->execute();
-
-        $connection->commit();
     }
+    $connection->commit();
 }
 
 $table = $connection->query("SELECT * FROM Oferta");
