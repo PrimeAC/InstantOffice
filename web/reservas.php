@@ -43,6 +43,8 @@ if (isset($_REQUEST["reserva_pay"])) {
 
     $sql = "SELECT estado FROM Estado WHERE numero = :reserva HAVING estado = 'aceite'";
 
+    $connection->beginTransaction();
+
     $query = $connection->prepare($sql);
     $query->execute(array('reserva' => $_REQUEST["reserva_pay"]));
 
@@ -60,6 +62,7 @@ if (isset($_REQUEST["reserva_pay"])) {
             $query->execute(array('reserva' => $_REQUEST["reserva_pay"], 'pagamento' => $_REQUEST["payment"]));
         }
     }
+    $connection->commit();
 }
 echo('<h3>Reservas por pagar:</h3>');
 $table = $connection->query("SELECT numero FROM Estado WHERE estado = 'aceite' AND numero NOT IN 
