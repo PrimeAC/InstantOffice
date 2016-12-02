@@ -70,6 +70,7 @@ FROM (
                         NATURAL JOIN Aluga
                         NATURAL JOIN Oferta
                       WHERE YEAR(data) = 2016
-                    ) AS money_made_table ON Posto.morada = money_made_table.morada AND Posto.codigo = money_made_table.codigo
+                    ) AS money_made_table
+           ON Posto.morada = money_made_table.morada AND Posto.codigo = money_made_table.codigo
      ) AS A
 GROUP BY morada, containing_space_code
