@@ -11,7 +11,6 @@
             text-align: left;
         }
         table {
-            float:left;
             margin-left: 2%;
         }
     </style>
@@ -67,10 +66,6 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
 }
 
 $table = $connection->query("SELECT * FROM Oferta");
-drawTable($table);
-$table = $connection->query("SELECT * FROM Reserva");
-drawTable($table);
-$table = $connection->query("SELECT * FROM Estado");
 drawTable($table);
 ?>
 </body>
