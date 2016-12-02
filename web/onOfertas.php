@@ -23,7 +23,7 @@
     <label for="codigo_add">Codigo</label>
     <input id="codigo_add" name="codigo_add">
     <label for="data_add">Data inicio</label>
-    <input id="data_add" name="data_add">
+    <input id="data_add" name="data_add" placeholder="yyyy/mm/dd">
     <input type="submit" value="Submeter">
 </form>
 <br>
