@@ -15,7 +15,7 @@
 </head>
 <body>
 <form action="totalEspaco.php" method="post">
-    <h3>Total realizado por Espaco:</h3>
+    <h3>Total realizado por Espaco</h3>
     <label for="morada_query">Morada do Edificio</label>
     <input id="morada_query" name="morada_query">
 </form>
