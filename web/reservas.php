@@ -25,20 +25,17 @@
     <h3>Pagar Reserva</h3>
     <label for="reserva_pay">Numero de Reserva</label>
     <input id="reserva_pay" name="reserva_pay"><br>
-    <input type="radio" name="payment" value="cartao" checked> Cartao de credito/debito<br>
-    <input type="radio" name="payment" value="transferencia"> Transferencia bancaria<br>
-    <input type="radio" name="payment" value="dinheiro"> Numerario<br>
-    <input type="radio" name="payment" value="cheque"> Cheque<br>
-    <input type="radio" name="payment" value="paypal"> PayPal<br>
+    <input type="radio" name="payment" value="cartao" checked>Cartao de credito/debito<br>
+    <input type="radio" name="payment" value="transferencia">Transferencia bancaria<br>
+    <input type="radio" name="payment" value="dinheiro">Numerario<br>
+    <input type="radio" name="payment" value="cheque">Cheque<br>
+    <input type="radio" name="payment" value="paypal">PayPal<br>
     <input type="submit" value="Submeter">
 </form>
 <br>
 <br>
 
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include 'DB.php';
 include 'helpers.php';
 
