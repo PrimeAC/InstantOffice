@@ -33,11 +33,11 @@ error_reporting(E_ALL);
 include 'DB.php';
 include 'helpers.php';
 if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"])){
-//    $reserva = $_REQUEST["reserva_add"];
-//    $codigo = $_REQUEST["codigo_add"];
-//    $data = $_REQUEST["data_add"];
-    $sql1 = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada='A' AND codigo=1000 AND data_inicio = '2016/1/10'";
-    $query = $connection->prepare($sql1);
+    $reserva = $_REQUEST["reserva_add"];
+    $codigo = $_REQUEST["codigo_add"];
+    $data = $_REQUEST["data_add"];
+    $sql = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada=$reserva AND codigo=$codigo AND data_inicio = $data";
+    $query = $connection->prepare($sql);
     $query->execute();
     $result = $query->fetchAll();
     if (count($result) != 0) {
