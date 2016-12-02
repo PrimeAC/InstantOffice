@@ -54,22 +54,22 @@ WHERE n_alugaveis = fiscal_count;
 SELECT
   morada,
   containing_space_code AS codigo,
-  SUM(money)               moneyz
+  SUM(money_made)          total
 FROM (
        SELECT
-         LOL.morada,
-         IFNULL(codigo_espaco, LOL.codigo) containing_space_code,
-         money
+         money_made_table.morada,
+         IFNULL(codigo_espaco, money_made_table.codigo) containing_space_code,
+         money_made
        FROM Posto
          RIGHT JOIN (
                       SELECT
                         morada,
                         codigo,
-                        DATEDIFF(data_fim, data_inicio) * tarifa AS money
+                        (1 + DATEDIFF(data_fim, data_inicio)) * tarifa AS money_made
                       FROM Paga
                         NATURAL JOIN Aluga
                         NATURAL JOIN Oferta
                       WHERE YEAR(data) = 2016
-                    ) AS LOL ON Posto.morada = LOL.morada AND Posto.codigo = LOL.codigo
-     ) AS LOL2
+                    ) AS money_made_table ON Posto.morada = money_made_table.morada AND Posto.codigo = money_made_table.codigo
+     ) AS A
 GROUP BY morada, containing_space_code
