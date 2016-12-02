@@ -33,13 +33,28 @@ error_reporting(E_ALL);
 include 'DB.php';
 include 'helpers.php';
 if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"])){
-    $sql = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada='B' AND codigo=2000 AND Oferta.data_inicio = '2016/1/10'";
-    $query = $connection->prepare($sql);
-    echo(is_null($query));
+//    $reserva = $_REQUEST["reserva_add"];
+//    $codigo = $_REQUEST["codigo_add"];
+//    $data = $_REQUEST["data_add"];
+    $sql1 = "SELECT morada, codigo, data_inicio FROM Oferta WHERE morada='A' AND codigo=1000 AND data_inicio = '2016/1/10'";
+    $query = $connection->prepare($sql1);
     $query->execute();
+    $result = $query->fetchAll();
+    if (count($result) != 0) {
+        $sql = "SELECT MAX(numero) FROM Reserva";
+        $query = $connection->prepare($sql);
+        $query->execute();
+        $new_reserva = $query->fetch(PDO::FETCH_COLUMN) + 1;
+        $query = $connection->prepare("INSERT INTO Reserva VALUE ($new_reserva)");
+        $query->execute();
+        $sql = "INSERT INTO Estado VALUES($new_reserva, NOW(), 'pendente')";
+        $query = $connection->prepare($sql);
+        $query->execute();
+    }
+    else{echo("Insira dados válidos");
 }
 
-$table = $connection->query("SELECT * FROM Reserva");
+$table = $connection->query("SELECT * FROM Estado");
 drawTable($table);
 ?>
 </body>
