@@ -47,6 +47,8 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
 
         $sql = "SELECT MAX(numero) FROM Reserva";
 
+        $connection->beginTransaction();
+
         $query = $connection->prepare($sql);
         $query->execute();
 
@@ -59,6 +61,8 @@ if (isset($_REQUEST["reserva_add"],$_REQUEST["codigo_add"],$_REQUEST["data_add"]
 
         $query = $connection->prepare($sql);
         $query->execute();
+
+        $connection->commit();
     }
 }
 
