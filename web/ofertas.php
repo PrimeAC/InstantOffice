@@ -63,13 +63,15 @@ if (isset($_REQUEST["morada_remove"], $_REQUEST["codigo_remove"], $_REQUEST["dat
         $query->execute(array('morada' => $_REQUEST["morada_remove"], 'codigo' => $_REQUEST["codigo_remove"], 'data_inicio' => $_REQUEST["datai_remove"]));
     }
 if (isset($_REQUEST["morada_add"], $_REQUEST["codigo_add"], $_REQUEST["datai_add"], $_REQUEST["dataf_add"], $_REQUEST["tarifa_add"])) {
-    if(strtotime($_REQUEST["datai_add"]) < strtotime($_REQUEST["dataf_add"])){
+    if((strtotime($_REQUEST["datai_add"]) < strtotime($_REQUEST["dataf_add"])) AND (strtotime(date_default_timezone_get()) <= strtotime($_REQUEST["datai_add"]))){
         $sql = 'INSERT INTO Oferta VALUES (:morada, :codigo, :data_inicio, :data_fim, :tarifa);';
         $query = $connection->prepare($sql);
         $query->execute(array(':morada' => $_REQUEST["morada_add"] , ':codigo' => $_REQUEST["codigo_add"], ':data_inicio' => $_REQUEST["datai_add"], ':data_fim' => $_REQUEST["dataf_add"], ':tarifa' => $_REQUEST["tarifa_add"]));
 
     }
-
+    else {
+        echo "Data invalida";
+    }
     }
 
 $table = $connection->query("SELECT * FROM Oferta");
