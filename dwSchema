@@ -1,0 +1,39 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Utilizador CASCADE;
+DROP TABLE IF EXISTS Localizacao CASCADE;
+DROP TABLE IF EXISTS Tempo CASCADE;
+DROP TABLE IF EXISTS Data CASCADE;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE Utilizador
+(
+  nif      INTEGER      NOT NULL,
+  nome     VARCHAR(255) NOT NULL,
+  telefone INTEGER      NOT NULL,
+  PRIMARY KEY (nif)
+);
+
+CREATE TABLE Localizacao
+(
+  nif      INTEGER      NOT NULL,
+  nome     VARCHAR(255) NOT NULL,
+  telefone INTEGER      NOT NULL,
+  PRIMARY KEY (nif)
+);
+
+CREATE TABLE Tempo
+(
+  nif      INTEGER      NOT NULL,
+  nome     VARCHAR(255) NOT NULL,
+  telefone INTEGER      NOT NULL,
+  PRIMARY KEY (nif)
+);
+
+CREATE TABLE Data
+(
+  date_key      INTEGER      NOT NULL,
+  date_year     INTEGER      NOT NULL,
+  date_month_number     INTEGER NOT NULL,
+  date_day     INTEGER NOT NULL,
+  PRIMARY KEY (date_key)
+);

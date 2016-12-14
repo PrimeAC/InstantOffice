@@ -1,3 +1,4 @@
+#Triggers
 DROP TRIGGER IF EXISTS validate_dates;
 
 DELIMITER //
@@ -74,6 +75,31 @@ CREATE PROCEDURE totalPorEspaco(moradaToFind VARCHAR(255))
                ON Posto.morada = money_made_table.morada AND Posto.codigo = money_made_table.codigo
          ) AS A
     GROUP BY morada, containing_space_code;
+  END;
+//
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS load_date_dim;
+DELIMITER //
+CREATE PROCEDURE load_date_dim()
+  BEGIN
+    DECLARE v_full_date DATETIME;
+    SET v_full_date = '2016-01-01 00:00:00';
+    WHILE v_full_date < '2018-01-01 00:00:00' DO
+      INSERT INTO Data(
+        date_key,
+        date_year,
+        date_month_number,
+        date_day
+      ) VALUES (
+        YEAR(v_full_date) * 10000 + MONTH(v_full_date)*100 + DAY(v_full_date),
+        YEAR(v_full_date),
+        MONTH(v_full_date),
+        DAY(v_full_date)
+      );
+      SET v_full_date = DATE_ADD(v_full_date, INTERVAL 1 DAY);
+    END WHILE;
   END;
 //
 
