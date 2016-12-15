@@ -2,11 +2,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS Localizacao CASCADE;
 DROP TABLE IF EXISTS Tempo CASCADE;
 DROP TABLE IF EXISTS Data CASCADE;
+DROP TABLE IF EXISTS Reserva_Factos CASCADE;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE Localizacao
 (
-  location_id MEDIUMINT    NOT NULL AUTO_INCREMENT,
+  location_id MEDIUMINT NOT NULL AUTO_INCREMENT,
   posto       INTEGER,
   espaco      INTEGER,
   edificio    VARCHAR(255),
@@ -24,11 +25,22 @@ CREATE TABLE Tempo
 
 CREATE TABLE Data
 (
-  date_id          INTEGER NOT NULL,
+  date_id           INTEGER NOT NULL,
   date_day          INTEGER NOT NULL,
   date_week         INTEGER NOT NULL,
   date_month_number INTEGER NOT NULL,
   date_semester     INTEGER NOT NULL,
   date_year         INTEGER NOT NULL,
   PRIMARY KEY (date_id)
+);
+
+CREATE TABLE Reserva_Factos
+(
+  reserva_id  INTEGER NOT NULL,
+  date_id     INTEGER NOT NULL,
+  time_id     INTEGER NOT NULL,
+  location_id INTEGER NOT NULL,
+  nif         INTEGER NOT NULL,
+  value       INTEGER NOT NULL,
+  PRIMARY KEY (reserva_id)
 );

@@ -177,3 +177,40 @@ FOR EACH ROW
 
 DELIMITER ;
 
+
+#populates Location table Reserva_Factos
+DROP TRIGGER IF EXISTS load_Reserva_Factos;
+
+DELIMITER //
+
+CREATE TRIGGER load_Reserva_Factos
+AFTER INSERT ON Paga
+FOR EACH ROW
+  BEGIN
+
+    DECLARE data INTEGER;
+    DECLARE time INTEGER;
+    DECLARE location INTEGER;
+    DECLARE nif INTEGER;
+    DECLARE value INTEGER;
+
+      #SET data = (SELECT Data.date_id FROM Data WHERE Data.date_day = (SELECT DAY(data) FROM Paga WHERE numero = new.numero) AND
+      #            Data.date_month_number = (SELECT MONTH(data) FROM Paga WHERE numero = new.numero) AND
+      #            Data.date_year = (SELECT YEAR(data) FROM Paga WHERE numero = new.numero));
+
+      #SET time = (SELECT time_id FROM Tempo WHERE hour_of_day = (SELECT HOUR(data) FROM Paga WHERE numero = new.numero) AND
+      #            minute_of_day = (SELECT MINUTE(data) FROM Paga WHERE numero = new.numero));
+
+      #SET location = (SELECT location_id FROM Localizacao l, (SELECT morada, codigo FROM Paga NATURAL JOIN Aluga WHERE numero = new.numero) AS
+      #                A WHERE A.codigo = l.posto OR A.codigo = l.espaco AND l.edificio = A.morada);
+
+      SET nif = (SELECT a.nif FROM Aluga a NATURAL JOIN Paga p WHERE p.numero = new.numero);
+
+      SET value = (SELECT DATEDIFF(data_fim, data_inicio) * tarifa AS result FROM Paga NATURAL JOIN Aluga NATURAL JOIN
+                  Oferta WHERE numero = new.numero);
+
+    INSERT INTO Reserva_Factos (reserva_id, date_id, time_id, location_id, nif, value) VALUES (new.numero, data, 0, 0, nif, value);
+  END //
+
+DELIMITER ;
+
