@@ -113,6 +113,7 @@ DELIMITER ;
 #populates Time table
 DROP PROCEDURE IF EXISTS load_time_dim;
 DELIMITER //
+
 CREATE PROCEDURE load_time_dim()
   BEGIN
     DECLARE v_full_time DATETIME;
@@ -131,6 +132,48 @@ CREATE PROCEDURE load_time_dim()
     END WHILE;
   END;
 //
+
+DELIMITER ;
+
+#populates Location table with edificio
+DROP TRIGGER IF EXISTS load_localizacao_edificio;
+
+DELIMITER //
+
+CREATE TRIGGER load_localizacao_edificio
+AFTER INSERT ON Edificio
+FOR EACH ROW
+  BEGIN
+    INSERT INTO Localizacao (edificio) VALUES (new.morada);
+  END //
+
+DELIMITER ;
+
+#populates Location table with espaco
+DROP TRIGGER IF EXISTS load_localizacao_espaco;
+
+DELIMITER //
+
+CREATE TRIGGER load_localizacao_espaco
+AFTER INSERT ON Espaco
+FOR EACH ROW
+  BEGIN
+    INSERT INTO Localizacao (edificio, espaco) VALUES (new.morada, new.codigo);
+  END //
+
+DELIMITER ;
+
+#populates Location table with posto
+DROP TRIGGER IF EXISTS load_localizacao_posto;
+
+DELIMITER //
+
+CREATE TRIGGER load_localizacao_posto
+AFTER INSERT ON Posto
+FOR EACH ROW
+  BEGIN
+    INSERT INTO Localizacao (edificio, espaco, posto) VALUES (new.morada, new.codigo_espaco, new.codigo);
+  END //
 
 DELIMITER ;
 
