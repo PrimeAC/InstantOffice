@@ -7,7 +7,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE Localizacao
 (
-  location_id MEDIUMINT NOT NULL AUTO_INCREMENT,
+  location_id INTEGER NOT NULL AUTO_INCREMENT,
   posto       INTEGER,
   espaco      INTEGER,
   edificio    VARCHAR(255),
@@ -16,7 +16,7 @@ CREATE TABLE Localizacao
 
 CREATE TABLE Tempo
 (
-  time_id       MEDIUMINT NOT NULL AUTO_INCREMENT,
+  time_id       INTEGER NOT NULL AUTO_INCREMENT,
   time_of_day   INTEGER   NOT NULL,
   hour_of_day   INTEGER   NOT NULL,
   minute_of_day INTEGER   NOT NULL,
@@ -42,5 +42,9 @@ CREATE TABLE Reserva_Factos
   location_id INTEGER NOT NULL,
   nif         INTEGER NOT NULL,
   value       INTEGER NOT NULL,
-  PRIMARY KEY (reserva_id)
+  PRIMARY KEY (reserva_id, date_id, time_id),
+  FOREIGN KEY (date_id) REFERENCES Data (date_id) ON DELETE CASCADE,
+  FOREIGN KEY (time_id) REFERENCES Tempo (time_id) ON DELETE CASCADE,
+  FOREIGN KEY (location_id) REFERENCES Localizacao (location_id) ON DELETE CASCADE,
+  FOREIGN KEY (nif) REFERENCES User (nif) ON DELETE CASCADE
 );

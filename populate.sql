@@ -12,10 +12,6 @@ TRUNCATE Aluga;
 TRUNCATE Paga;
 TRUNCATE Estado;
 TRUNCATE Reserva;
-TRUNCATE Tempo;
-TRUNCATE Data;
-TRUNCATE Localizacao;
-TRUNCATE Reserva_Factos;
 SET FOREIGN_KEY_CHECKS = 1;
 
 
