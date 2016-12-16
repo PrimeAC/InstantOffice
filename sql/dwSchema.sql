@@ -8,9 +8,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE Localizacao
 (
   location_id INTEGER NOT NULL AUTO_INCREMENT,
-  posto       INTEGER,
-  espaco      INTEGER,
   edificio    VARCHAR(255),
+  espaco      INTEGER,
+  posto       INTEGER,
   PRIMARY KEY (location_id)
 );
 
@@ -26,11 +26,11 @@ CREATE TABLE Tempo
 CREATE TABLE Data
 (
   date_id           INTEGER NOT NULL,
-  date_day          INTEGER NOT NULL,
-  date_week         INTEGER NOT NULL,
-  date_month_number INTEGER NOT NULL,
-  date_semester     INTEGER NOT NULL,
   date_year         INTEGER NOT NULL,
+  date_semester     INTEGER NOT NULL,
+  date_month_number INTEGER NOT NULL,
+  date_week         INTEGER NOT NULL,
+  date_day          INTEGER NOT NULL,
   data              DATE    NOT NULL,
   PRIMARY KEY (date_id)
 );

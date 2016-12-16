@@ -9,18 +9,18 @@ CALL load_date_dim();
 
 CALL load_time_dim();
 
-INSERT INTO Localizacao (espaco, edificio) (
+INSERT INTO Localizacao (posto, espaco, edificio) (
   SELECT
     codigo,
+    codigo_espaco,
     morada
-  FROM Espaco);
+  FROM Posto);
 
-INSERT INTO Localizacao (posto, espaco, edificio) (
+INSERT INTO Localizacao (espaco, edificio) (
 SELECT
 codigo,
-codigo_espaco,
 morada
-FROM Posto);
+FROM Espaco);
 
 INSERT INTO Reserva_Factos (reserva_id, date_id, time_id, location_id, nif, value, duration) (
   SELECT

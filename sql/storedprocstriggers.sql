@@ -101,7 +101,7 @@ CREATE PROCEDURE load_date_dim()
         DAY(v_full_date),
         WEEK(v_full_date),
         MONTH(v_full_date),
-        MONTH(v_full_date) / 6,
+        (QUARTER(v_full_date) / 6) + 1,
         YEAR(v_full_date),
         DATE(v_full_date)
       );
