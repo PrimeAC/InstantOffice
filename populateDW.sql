@@ -24,25 +24,13 @@ codigo_espaco,
 morada
 FROM Posto);
 
-/*
-(SELECT date_id FROM Data WHERE date_day = (SELECT DAY(data) FROM Paga WHERE numero = new.numero) AND
-                 date_month_number = (SELECT MONTH(data) FROM Paga WHERE numero = new.numero) AND
-                 date_year = (SELECT YEAR(data) FROM Paga WHERE numero = new.numero));
+SELECT date_id FROM Data NATURAL JOIN Paga;
 
-      #SET time = (SELECT time_id FROM Tempo WHERE hour_of_day = (SELECT HOUR(data) FROM Paga WHERE numero = new.numero) AND
-      #            minute_of_day = (SELECT MINUTE(data) FROM Paga WHERE numero = new.numero));
+SELECT time_id FROM Tempo NATURAL JOIN (SELECT MINUTE(data) + HOUR(data) * 60 AS time_of_day FROM Paga) A;
 
-      #SET location = (SELECT location_id FROM Localizacao l, (SELECT morada, codigo FROM Paga NATURAL JOIN Aluga WHERE numero = new.numero) AS
-      #                A WHERE A.codigo = l.posto OR A.codigo = l.espaco AND l.edificio = A.morada);
+SELECT nif FROM Aluga NATURAL JOIN Paga GROUP BY nif;
 
-      SET nif = (SELECT a.nif FROM Aluga a NATURAL JOIN Paga p WHERE p.numero = new.numero);
+SELECT DATEDIFF(data_fim, data_inicio) * tarifa AS value FROM Paga NATURAL JOIN Aluga NATURAL JOIN Oferta;
 
-      SET value = (SELECT DATEDIFF(data_fim, data_inicio) * tarifa AS result FROM Paga NATURAL JOIN Aluga NATURAL JOIN
-                  Oferta WHERE numero = new.numero);
+SELECT DATEDIFF(data_fim, data_inicio) AS duration FROM Paga NATURAL JOIN Aluga NATURAL JOIN Oferta;
 
-    INSERT INTO Reserva_Factos (reserva_id, date_id, time_id, location_id, nif, value) VALUES (new.numero, data, 0, 0, nif, value);
-  END //
-
-DELIMITER ;
-
-*/

@@ -94,14 +94,16 @@ CREATE PROCEDURE load_date_dim()
         date_week,
         date_month_number,
         date_semester,
-        date_year
+        date_year,
+        data
       ) VALUES (
         YEAR(v_full_date) * 10000 + MONTH(v_full_date)*100 + DAY(v_full_date),
         DAY(v_full_date),
         WEEK(v_full_date),
         MONTH(v_full_date),
         MONTH(v_full_date) / 6,
-        YEAR(v_full_date)
+        YEAR(v_full_date),
+        DATE(v_full_date)
       );
       SET v_full_date = DATE_ADD(v_full_date, INTERVAL 1 DAY);
     END WHILE;
