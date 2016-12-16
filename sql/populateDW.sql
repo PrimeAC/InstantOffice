@@ -29,7 +29,7 @@ INSERT INTO Reserva_Factos (reserva_id, date_id, time_id, location_id, nif, valu
     time_id,
     location_id,
     nif,
-    tarifa,
+    tarifa * (DATEDIFF(data_fim, data_inicio) + 1),
     DATEDIFF(data_fim, data_inicio) + 1
   FROM Paga P
     NATURAL JOIN Aluga
