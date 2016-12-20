@@ -1,3 +1,4 @@
+#Triggers
 DROP TRIGGER IF EXISTS validate_dates;
 
 DELIMITER //
@@ -74,6 +75,63 @@ CREATE PROCEDURE totalPorEspaco(moradaToFind VARCHAR(255))
                ON Posto.morada = money_made_table.morada AND Posto.codigo = money_made_table.codigo
          ) AS A
     GROUP BY morada, containing_space_code;
+  END;
+//
+
+DELIMITER ;
+
+#populates Date table
+DROP PROCEDURE IF EXISTS load_date_dim;
+DELIMITER //
+CREATE PROCEDURE load_date_dim()
+  BEGIN
+    DECLARE v_full_date DATETIME;
+    SET v_full_date = '2016-01-01 00:00:00';
+    WHILE v_full_date < '2018-01-01 00:00:00' DO
+      INSERT INTO Data(
+        date_id,
+        date_day,
+        date_week,
+        date_month_number,
+        date_semester,
+        date_year,
+        data
+      ) VALUES (
+        YEAR(v_full_date) * 10000 + MONTH(v_full_date)*100 + DAY(v_full_date),
+        DAY(v_full_date),
+        WEEK(v_full_date),
+        MONTH(v_full_date),
+        (QUARTER(v_full_date) / 6) + 1,
+        YEAR(v_full_date),
+        DATE(v_full_date)
+      );
+      SET v_full_date = DATE_ADD(v_full_date, INTERVAL 1 DAY);
+    END WHILE;
+  END;
+//
+
+DELIMITER ;
+
+#populates Time table
+DROP PROCEDURE IF EXISTS load_time_dim;
+DELIMITER //
+
+CREATE PROCEDURE load_time_dim()
+  BEGIN
+    DECLARE v_full_time DATETIME;
+    SET v_full_time = '1996-04-25 00:00:00';
+    WHILE v_full_time < '1996-04-25 23:59:59' DO
+      INSERT INTO Tempo (
+        time_of_day,
+        hour_of_day,
+        minute_of_day
+      ) VALUES (
+        HOUR(v_full_time)*60 + MINUTE(v_full_time),
+        HOUR(v_full_time),
+        MINUTE(v_full_time)
+      );
+      SET v_full_time = DATE_ADD(v_full_time, INTERVAL 1 MINUTE);
+    END WHILE;
   END;
 //
 
